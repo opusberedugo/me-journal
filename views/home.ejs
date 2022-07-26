@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= username %> &mdash; Me Journal Profile
+  </title>
+  <link rel="stylesheet" href="./css/select2.css">
+  <link rel="stylesheet" href="./css/home.css">
+</head>
+
+<body>
+  <nav>
+    <div class="brand">
+      <div class="logo">
+        Me Journal
+      </div>
+      <div class="menu">
+
+      </div>
+    </div>
+
+    <div class="username">
+      <%= username %>
+    </div>
+
+    <div class="options">
+      <div class="container">
+        <div class="option active">Recent</div>
+        <div class="option">Summary</div>
+        <div class="option">Subject</div>
+        <div class="option">Notes</div>
+        <div class="option">Details</div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="recent active">
+      <h2>Recent Made Notes</h2>
+      <div class="recent-notes">
+        <div class="note">Lorem Ipsum</div>
+        <div class="note">Lorem Ipsum</div>
+        <div class="note">Lorem Ipsum</div>
+      </div>
+      <h2>Recent Made Subject</h2>
+
+    </section>
+    <section class="summary">
+      <div class="row">
+
+      </div>
+    </section>
+    <section class="subject">
+      <% if (subjects.length==0) { %>
+        <div class="empty">
+          <p>You don't have any Subjects</p>
+          <a href="#" class="modal-link">Create Subject</a>
+        </div>
+        <% } else { %>
+          <% subjects.forEach((subject) => { %>
+            <!-- <div class="note subject"><%= subject.subject %></div> -->
+            <div class="note"><%= subject.subject %></div>
+          <% }) %>
+          <div class="modal-link note">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path d="M13 7L11 7 11 11 7 11 7 13 11 13 11 17 13 17 13 13 17 13 17 11 13 11z"/>
+              <path d="M12,2C6.486,2,2,6.486,2,12s4.486,10,10,10c5.514,0,10-4.486,10-10S17.514,2,12,2z M12,20c-4.411,0-8-3.589-8-8 s3.589-8,8-8s8,3.589,8,8S16.411,20,12,20z"/>
+            </svg>
+          </div>
+        <% }%>
+    </section>
+    <section class="notes">
+
+      <% if (notes.length==0) { %>
+        <div class="empty">
+          <p>You don't have any notes</p>
+          <a href="#" class="modal-link">Create note</a>
+        </div>
+        <% } else { %>
+            
+          <% }%>
+
+            <!-- <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div>
+          <div class="note">Lorem Ipsum</div> -->
+    </section>
+    <section class="details"></section>
+  </main>
+
+  <div class="modal" style="display: none;">
+    <button class="close">
+      <svg width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+
+        <path
+          d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" />
+
+      </svg>
+
+    </button>
+
+    <form action="create-subject" method="post">
+      <h2>Create Subject</h2>
+      <input type="text" name="subject" id="" placeholder="Subject Name">
+      <p class="error"></p>
+      <button>Submit</button>
+    </form>
+  </div>
+
+  <div class="modal" style="display: none;">
+    <button class="close">
+      <svg width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+
+        <path
+          d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" />
+
+      </svg>
+
+    </button>
+
+    <form action="create-note" method="post">
+      <h2>Create Note</h2>
+      <input type="text" name="" id="" placeholder="Subject Name">
+      <select name="topic"  id="">
+        <% if (subjects.length==0) { %>
+          <option disabled value="">You don't have any Subject</option>
+          <% } else { %>
+            <% subjects.forEach((subject) => { %>
+              <option  value="<%= subject.subject %>"><%= subject.subject %></option>
+            <% }) %>
+          <% }%>
+      </select>
+      <p class="error"></p>
+      <button>Submit</button>
+    </form>
+  </div>
+
+  <!-- <div class="modal"></div> -->
+  <script src="http://<%=host%>/socket.io/socket.io.min.js"></script>
+  <script src="./js/jquery-3.5.1.js"></script>
+  <script src="./js/select2.js"></script>
+  <script src="./js/home.js"></script>
+
+</body>
+
+</html>

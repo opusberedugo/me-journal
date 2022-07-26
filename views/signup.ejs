@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Me Journal Sign Up</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+
+<body>
+
+  <main>
+    <div class="logo">Me Journal</div>
+    <form action="signup" method="post">
+      <label for="firstname">First name:</label>
+      <input type="text" id="firstname" name="firstname">
+      <p class="error"></p>
+
+      <label for="lastname">Last name:</label>
+      <input type="text" id="lastname" name="lastname">
+      <p class="error"></p>
+
+
+      <label for="email">Email:</label>
+      <input type="emai" name="email" id="email">
+      <p class="error"></p>
+
+      <label for="phone">Phone:</label>
+      <input type="tel" name="phone" id="phone">
+      <p class="error"></p>
+
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username">
+      <p class="error"></p>
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password">
+      <p class="error"></p>
+
+      <label for="confirm-pasword"> Confirm Password:</label>
+      <input type="password" name="confirm-password" id="confirm-pasword">
+      <p class="error"></p>
+
+      <button type="submit">Sign Up</button>
+      <p class="link"><a href="#">Forgot Password</a></p>
+    </form>
+    <p class="link"><a href="./">Already have an account | Sign In</a></p>
+  </main>
+
+  <script src="./socket.io/socket.io.min.js"></script>
+  <script src="js/signup.js"></script>
+</body>
+
+</html>

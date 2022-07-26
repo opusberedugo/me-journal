@@ -1,0 +1,90 @@
+@import "variables.scss";
+@import "reset.scss";
+@import "mixins.scss";
+
+
+body{
+  background-color: $white;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+nav{
+  background-color: $black;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  a{
+    display: block;
+    margin-right: auto;
+  }
+  button{
+    background-color: $black;
+    border: none;
+    padding: 10px;
+  }
+  svg{
+    path{
+      fill: $white;
+    }
+  }
+}
+
+main{
+  padding:  15vh 25vw ;
+  @include media-max(975px){
+    padding: 15vh 20vw;
+  }
+  @include media-max(780px){
+    padding: 15vh 10vw;
+  }
+
+  @include media-max(580px){
+    padding: 15vh 20px;
+  }
+
+
+  form{
+    background-color: white;
+    padding: 50px;
+    input{
+      width: 100%;
+      background-color: $white;
+      border: 1px solid $black;
+      font-size: 1.25rem;
+      margin: 10px 0;
+      padding: 10px;
+      display: block;
+      &:focus{
+        box-shadow: 0 0 0 0.125em $black;
+      }
+      &.error{
+        border: 1px solid $base-red;
+        &:focus{
+          box-shadow: 0 0 0 0.125em $base-red;
+        }
+      }
+    }
+  }
+  p.link{
+    text-align: center;
+    padding: 10px 0;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  p.error{
+    color: $base-red;
+    padding: 10px 0;
+  }
+  input[type = 'submit'], button{
+    width: 100%;
+    background-color: $black;
+    border: 1px solid $black;
+    color: $white;
+    font-size: 1.25rem;
+    margin: 10px 0;
+    padding: 10px;
+    display: block;
+  }
+}

@@ -1,0 +1,237 @@
+@import "variables.scss";
+@import "reset.scss";
+@import "mixins.scss";
+
+nav {
+  .brand {
+    .logo {
+      font-size: 80px;
+    }
+  }
+
+  .options {
+    width: 100%;
+    padding: 20px 5vw;
+
+    .container {
+      display: flex;
+      padding: 0 20px;
+      min-width: 100%;
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .option {
+        min-width: 200px;
+        min-height: 200px;
+        margin: 0 20px;
+        background-color: $white;
+        text-align: center;
+        border-radius: 10px;
+
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: $white2;
+        }
+
+        &.active {
+          background-color: $black;
+          color: $white;
+
+          &:hover {
+            background-color: $black2;
+          }
+        }
+
+        &:first-of-type {
+          margin-left: auto;
+        }
+
+        &:last-of-type {
+          margin-left: auto;
+        }
+      }
+
+    }
+  }
+}
+
+main {
+  padding: 20px 5vw;
+}
+
+.username {
+  text-align: center;
+  font-size: 24px;
+}
+
+main {
+  section {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 200px 20px;
+      font-weight: 600;
+      font-size: 24px;
+
+      a {
+        color: $black;
+        font-weight: 500;
+        padding: 20px 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      svg {
+        path {
+          fill: $black;
+        }
+      }
+    }
+  }
+}
+
+.note {
+  padding: 20px;
+  border-radius: 5px;
+  margin: 10px 0;
+
+  &:nth-of-type(even) {
+    background-color: $black;
+    color: $white;
+    &.modal-link{
+      text-align:center;
+      svg{
+        path{
+          fill: $white;
+        }
+      }
+    }
+  }
+
+  &:nth-of-type(odd) {
+    background-color: $white-dark;
+    &.modal-link{
+      text-align:center;
+      svg{
+        path{
+          fill: $black;
+        }
+      }
+    }
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $black;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  button.close{
+    margin-left: auto;
+    background-color: $black;
+    border: none;
+    padding: 20px;
+    margin-right: 5px;
+    clip-path: circle();
+
+    &:hover{
+      background-color: $black2;
+    }
+
+    svg{
+      path{
+        fill: $white;
+      }
+    }
+  }
+
+  form {
+    background-color: $white;
+    margin:  auto;
+    max-height: calc(100vh - 40px);
+    width: 640px;
+    padding: 20px;
+    border-radius: 10px;
+
+    input{
+      width: 100%;
+      background-color: $white;
+      border: 2px solid $black;
+      font-size: 1.25rem;
+      margin: 10px 0;
+      padding: 10px;
+      display: block;
+      border-radius: 4px;
+      &:focus{
+        box-shadow: 0 0 0 0.125em $black;
+      }
+      &.error{
+        border: 2px solid $base-red;
+        &:focus{
+          box-shadow: 0 0 0 0.125em $base-red;
+        }
+      }
+    }
+
+    select{
+      width: 100%;
+      background-color: $white;
+      border: 2px solid $black;
+      font-size: 1.25rem;
+      margin: 10px 0;
+      padding: 10px;
+      padding-right: 20px;
+      display: block;
+      border-radius: 4px;
+      &:focus{
+        box-shadow: 0 0 0 0.125em $black;
+      }
+      &.error{
+        border: 2px solid $base-red;
+        &:focus{
+          box-shadow: 0 0 0 0.125em $base-red;
+        }
+      }
+    }
+
+    p.error{
+      color: $base-red;
+      padding: 5px 0;
+    }
+    
+    button{
+      width: 100%;
+      padding: 10px;
+      border: 2px $black solid;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 16px;
+      background-color: $black;
+      color: $white;
+      font-size: 1.25rem;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "_id": "new ObjectId('62c8df6e1ab717a90e506b4e')",
+  "firstname": "O.B.A.",
+  "lastname": "MUSICAL",
+  "email": "opusberedugo@gmail.com",
+  "phone": "08143833487",
+  "username": "Opuaye",
+  "password": "developer",
+  "emailVerficationStatus": "unverified",
+  "phoneVerficationStatus": "unverified",
+  "emailVerficationDate": null,
+  "phoneVerficationDate": null,
+  "accountCreationDate": "Sat Jul 09 2022 02:52:46 GMT+0100 (West Africa Standard Time)"
+}

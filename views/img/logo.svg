@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <style type="text/css">
+    @font-face {
+    font-family: 'Butterline Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Butterline Regular'), url('Butterline.woff') format('woff');
+    }
+    .rect{
+      fill:#1A1A1A;
+      stroke:#000000;
+      stroke-width:0.1;
+      stroke-miterlimit:10;
+    }
+
+    .text{
+      font-family: 'Butterline Regular'
+    }
+
+  </style>
+
+  <rect x="108.1" y="463.6" class="st1" width="1783.9" height="909.7" class="rect"/>
+	<text transform="matrix(0.7324 0 0 1 177.3354 1015.8066)" class="text">MeJournal </text>
+
+</svg>

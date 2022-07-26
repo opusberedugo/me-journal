@@ -1,0 +1,139 @@
+// Form
+let form = document.querySelector("form");
+
+// Inputs
+let inputs = Array.from(document.querySelectorAll("form input"));
+
+// Error
+let errorLabels = Array.from(document.querySelectorAll("p.error"))
+
+// Regular Expressions
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const phoneRegex = /[0](70|80|90|81|91)\d{8}/
+
+let usernameState = { state: false }
+
+const socket = io();
+
+
+const checkEmptyField = async () => {
+  inputs.forEach((input, index) => {
+    if (input.value.trim() === '') {
+      input.classList.add("error")
+      errorLabels[index].textContent = "this field is required"
+      throw Error("Field is empty")
+    }
+  })
+}
+
+const checkEmailValidity = async (emailField, emailErrorLabel) => {
+  if (!emailRegex.test(emailField.value.trim())) {
+    emailField.classList.add("error")
+    emailErrorLabel.textContent = "Please Enter a valid email"
+    throw Error("Email is not valid")
+  }
+}
+
+const checkNameValidity = async (nameField, nameErrorLabel) => {
+  if (nameField.value.trim().length < 4) {
+    nameField.classList.add("error")
+    nameErrorLabel.textContent = "Name must have at least 4 characters"
+    throw Error("Name not valid")
+  }
+}
+
+const checkUsernameValidity = async (usernameField, usernameErrorLabel) => {
+  if (usernameField.value.trim().length < 4) {
+    usernameField.classList.add("error")
+    usernameErrorLabel.textContent = "Userame must have at least 4 characters"
+    throw Error("Userame not valid")
+  }
+}
+
+const checkPhoneValidity = async (phoneField, phoneErrorLabel) => {
+  phoneField.value.replaceAll(/[A-z]/g, "");
+  if (!phoneRegex.test(phoneField.value.trim())) {
+    phoneField.classList.add("error")
+    phoneErrorLabel.textContent = "Please Enter a valid Nigerian Phone number"
+    throw Error("Phone number is not valid")
+  }
+}
+
+const checkUsernameAvailability = async (usernameField, userNameErrorLabel) => {
+  socket.emit('username-available', usernameField.value.trim())
+  let status = '';
+
+  socket.on("userAvailabilityState", (async (state) => {
+    status = await state;
+    console.log(state)
+    usernameState.state = state
+    return state
+  }))
+
+  // await status
+  console.log(`The Value of Status is ${status}`)
+}
+
+
+const checkPasswordValidity = async (field1, field2, ...errorLabels) => {
+  let fields = [field1, field2];
+
+  fields.forEach((field, index) => {
+    if (field.value.trim().length < 6) {
+      field.classList.add("error")
+      errorLabels[index].textContent = "Userame must have at least 6 characters"
+      throw Error("Password Invalid not valid")
+    }
+  })
+}
+
+const checkPasswordEqualiy = async (field1, field2, errorLabel) => {
+  if (field1.value.trim() != field2.value.trim()) {
+    field1.classList.add("error")
+    field2.classList.add("error")
+    errorLabel.textContent = "Passwords do not match"
+  }
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  inputs.map(input => input.classList.remove("error"));
+  errorLabels.map(label => label.textContent = "");
+
+  checkEmptyField()
+    .then(() => { checkNameValidity(inputs[0], errorLabels[0]).catch(e => console.warn(e.message)) })
+
+    .then(() => { checkNameValidity(inputs[1], errorLabels[1]).catch(e => console.warn(e.message)) })
+
+    .then(() => { checkEmailValidity(inputs[2], errorLabels[2]).catch(e => console.warn(e.message)) })
+
+    .then(() => { checkPhoneValidity(inputs[3], errorLabels[3]).catch(e => console.warn(e.message)) })
+
+    .then(() => { checkUsernameValidity(inputs[4], errorLabels[4]).catch(e => console.warn(e.message)) })
+
+    .then(() => {
+      checkUsernameAvailability(inputs[4], errorLabels[4])
+      .then(() => {
+        if (!usernameState.state) {
+          errorLabels[4].textContent = "Username is not available"
+          throw Error("Username Not available")
+        }
+      })
+      .catch(e => console.warn(e.message))
+    })
+
+    .then(() => { checkPasswordValidity(inputs[5], inputs[6], errorLabels[5], errorLabels[6]).catch(e => console.warn(e.message)) })
+
+    .then(() => { checkPasswordEqualiy(inputs[5], inputs[6], errorLabels[6]).catch(e => console.warn(e.message)) })
+
+    .then(() => {
+      checkUsernameAvailability(inputs[4], errorLabels[4]).then(() => { 
+        if (!usernameState.state) {
+          throw Error("Username not available")
+        }
+      }).then(form.submit())
+    })
+
+    .catch(e => console.warn(e.message))
+})
